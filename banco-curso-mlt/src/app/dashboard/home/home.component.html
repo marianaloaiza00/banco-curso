@@ -9,8 +9,8 @@
       <div class="card shadow-sm">
         <div class="card-body">
           <h5 class="card-title">Transacciones</h5>
-          <p class="card-text">Revisa el historial de tus transacciones financieras.</p>
-          <a routerLink="/transactions" class="btn btn-primary">Mis Transacciones</a>
+          <p class="card-text">Historial de transacciones</p>
+          <a routerLink="/transactions" class="btn btn-primary" (click)="goTransactions()">Mis Transacciones</a>
         </div>
       </div>
     </div>
@@ -19,8 +19,8 @@
       <div class="card shadow-sm">
         <div class="card-body">
           <h5 class="card-title">Cuentas</h5>
-          <p class="card-text">Gestiona tus cuentas bancarias de manera eficiente.</p>
-          <a routerLink="/accounts" class="btn btn-primary">Mi Cuenta</a>
+          <p class="card-text">tus cuentas.</p>
+          <a routerLink="/accounts" class="btn btn-primary" (click)="goAccounts()">Mi Cuenta</a>
         </div>
       </div>
     </div>

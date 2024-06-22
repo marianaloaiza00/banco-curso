@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../core/auth.service';
+import { AuthService } from '../../core/service/auth.service';
 import { Router } from '@angular/router';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  errorMessage: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -22,29 +24,35 @@ export class LoginComponent {
     });
   }
 
-  public login() {
+  login() {
     if (this.loginForm.valid) {
       const credentials = this.loginForm.value;
 
-      this.authService.login(credentials).subscribe({
+      this.authService.login(credentials).pipe(
+        catchError(error => {
+          if (error.status === 400) {
+            this.errorMessage = 'Revise su contraseña o correo electrónico.';
+          } else {
+            this.errorMessage = 'Ocurrió un error inesperado. Por favor, inténtelo de nuevo más tarde.';
+          }
+          return of(null);
+        })
+      ).subscribe({
         next: (response) => {
-          if (response.accessToken) {
+          if (response && response.accessToken) {
             localStorage.setItem('token', response.accessToken);
             this.router.navigate(['/accounts']);
           }
-        },
-        error: (error) => {
-          console.error('Intenta de nuevo', error);
         }
       });
     }
   }
 
-  public navigateSignUp(): void {
+  goSignUp(): void {
     this.router.navigate(['/signup']);
   }
 
-  public goHome(): void {
+  goHome(): void {
     this.router.navigate(['/home']);
   }
 }

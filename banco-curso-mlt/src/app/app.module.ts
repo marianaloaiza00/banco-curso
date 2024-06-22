@@ -7,12 +7,11 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { JwtInterceptor } from 'src/app/core/jwt.interceptor';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
    ],
   imports: [
     BrowserModule,
@@ -23,7 +22,7 @@ import { JwtInterceptor } from 'src/app/core/jwt.interceptor';
     AuthModule,
     DashboardModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../core/auth.service';
+import { AuthService } from '../../core/service/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,7 +21,7 @@ export class SignUpComponent {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
 
@@ -30,13 +30,17 @@ export class SignUpComponent {
       const user = this.signUpForm.value;
       this.authService.signUp(user).subscribe((response) => {
         this.accessToken = response.accessToken;
-        localStorage.setItem('accessToken', this.accessToken);
+        localStorage.setItem('token', this.accessToken);
+        this.router.navigate(['/home']);
       });
-    } else {
-      alert('Por favor, completa todos los campos requeridos.');
     }
   }
-  public goHome(): void {
+
+  goHome() {
     this.router.navigate(['/home']);
+  }
+
+  goLogin() {
+    this.router.navigate(['/login']);
   }
 }
