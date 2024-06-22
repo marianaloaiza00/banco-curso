@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TransactionService } from '../../core/service/transaction.service';
-import { Transaction } from 'src/app/shared/transaction.model';
+import { Transaction } from 'src/app/shared/models/transaction.model';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-transactions',
@@ -23,9 +22,5 @@ export class TransactionsComponent implements OnInit {
       next: transactions => this.transactions = transactions,
       error: err => console.error(err)
     });
-  }
-
- goHome() {
-    this.router.navigate(['/home']);
   }
 }

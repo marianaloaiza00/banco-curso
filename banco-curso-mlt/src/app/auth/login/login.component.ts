@@ -1,58 +1,52 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../core/service/auth.service';
+import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { catchError, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { AuthState } from '../store/auth.reducer';
+import * as AuthActions from '../store/auth.actions';
+import { selectAuthError, selectIsAuthenticated } from '../store/auth.selectors';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  errorMessage: string | null = null;
+  error$: Observable<string | null>;
+  isAuthenticated$: Observable<boolean>;
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
+    private store: Store<AuthState>,
     private router: Router
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+
+    this.error$ = this.store.select(selectAuthError);
+    this.isAuthenticated$ = this.store.select(selectIsAuthenticated);
+  }
+
+  ngOnInit(): void {
+    this.isAuthenticated$.subscribe(isAuthenticated => {
+      if (isAuthenticated) {
+        this.router.navigate(['/accounts']);
+      }
+    });
   }
 
   login() {
     if (this.loginForm.valid) {
       const credentials = this.loginForm.value;
-
-      this.authService.login(credentials).pipe(
-        catchError(error => {
-          if (error.status === 400) {
-            this.errorMessage = 'Revise su contraseña o correo electrónico.';
-          } else {
-            this.errorMessage = 'Ocurrió un error inesperado. Por favor, inténtelo de nuevo más tarde.';
-          }
-          return of(null);
-        })
-      ).subscribe({
-        next: (response) => {
-          if (response && response.accessToken) {
-            localStorage.setItem('token', response.accessToken);
-            this.router.navigate(['/accounts']);
-          }
-        }
-      });
+      this.store.dispatch(AuthActions.login({ credentials }));
     }
   }
 
   goSignUp(): void {
     this.router.navigate(['/signup']);
-  }
-
-  goHome(): void {
-    this.router.navigate(['/home']);
   }
 }
