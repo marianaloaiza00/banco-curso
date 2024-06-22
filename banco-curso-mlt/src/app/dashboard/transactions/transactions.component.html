@@ -1,0 +1,26 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Tipo</th>
+      <th scope="col">Origen</th>
+      <th scope="col">Destino</th>
+      <th scope="col">Monto</th>
+      <th scope="col">Categoría</th>
+      <th scope="col">Descripción</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Fecha</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let transaction of transactions">
+      <td>{{ transaction.type }}</td>
+      <td>{{ transaction.source }}</td>
+      <td>{{ transaction.destination }}</td>
+      <td>{{ transaction.amount }}</td>
+      <td>{{ transaction.category }}</td>
+      <td>{{ transaction.description }}</td>
+      <td>{{ transaction.status }}</td>
+      <td>{{ transaction.date | date:'short' }}</td>
+    </tr>
+  </tbody>
+</table>

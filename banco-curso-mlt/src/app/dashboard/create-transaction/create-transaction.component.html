@@ -1,0 +1,57 @@
+<p class="fw-bold mb-2 text-uppercase text-center">Ingresa los datos necesarios para la transacción</p>
+<form [formGroup]="createTransactionForm" (ngSubmit)="createTransaction()" class="mx-auto" style="max-width: 500px;">
+  <div class="form-outline form-white mb-4">
+    <label class="form-label" for="type">Tipo</label>
+    <select id="type" formControlName="type" type="text" class="form-control form-control-sm">
+    <option value="" disabled selected>Selecciona el tipo</option>
+    <option value="Withdrawal">Retiro</option>
+    <option value="Deposit">Depósito</option>
+    </select>
+    <div *ngIf="createTransactionForm.get('type')?.invalid && createTransactionForm.get('type')?.touched">
+      <small class="text-danger">este campo es necesario.</small>
+    </div>
+  </div>
+  <div class="form-outline form-white mb-4">
+    <label class="form-label" for="source">Origen</label>
+    <input id="source" formControlName="source" type="text" class="form-control form-control-sm" />
+    <div *ngIf="createTransactionForm.get('source')?.invalid && createTransactionForm.get('source')?.touched">
+      <small class="text-danger">este campo es necesario.</small>
+    </div>
+  </div>
+  <div class="form-outline form-white mb-4">
+    <label class="form-label" for="destination">Destino</label>
+    <input id="destination" formControlName="destination" type="text" class="form-control form-control-sm" />
+  </div>
+  <div class="form-outline form-white mb-4">
+    <label class="form-label" for="amount">Monto</label>
+    <input id="amount" formControlName="amount" type="number" class="form-control form-control-sm" min="1"/>
+    <div *ngIf="createTransactionForm.get('amount')?.invalid && createTransactionForm.get('amount')?.touched">
+      <small class="text-danger">este campo es necesario.</small>
+    </div>
+  </div>
+  <div class="form-outline form-white mb-4">
+    <label class="form-label" for="category">Categoría</label>
+    <input id="category" formControlName="category" type="text" class="form-control form-control-sm"/>
+    <div *ngIf="createTransactionForm.get('category')?.invalid && createTransactionForm.get('category')?.touched">
+      <small class="text-danger">este campo es necesario.</small>
+    </div>
+  </div>
+  <div class="form-outline form-white mb-4">
+    <label class="form-label" for="description">Descripción</label>
+    <input id="description" formControlName="description" type="text" class="form-control form-control-sm" />
+    <div *ngIf="createTransactionForm.get('description')?.invalid && createTransactionForm.get('description')?.touched">
+      <small class="text-danger">este campo es necesario.</small>
+    </div>
+  </div>
+  <p *ngIf="message">{{ message }}</p>
+  <button class="btn btn-outline-dark btn-sm px-5 mb-5" type="submit"
+    [disabled]="createTransactionForm.invalid">
+    Enviar
+  </button>
+  <button class="btn btn-outline-dark btn-sm px-5 mb-5 ms-2" type="submit" (click)="goTransactions()">
+    Ver transacciones
+  </button>
+  <button class="btn btn-outline-dark btn-sm px-5 mb-5 ms-2" (click)="goHome()">
+    Volver
+  </button>
+</form>

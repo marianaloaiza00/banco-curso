@@ -1,0 +1,28 @@
+<!-- home.component.html -->
+<div class="container">
+  <div class="my-5 text-center">
+    <h2 class="fw-bold">Bienvenido a la aplicación bancaria</h2>
+    <p>Página principal.</p>
+  </div>
+  <div class="row text-center justify-content-center">
+    <div class="col-md-4 mb-3">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Transacciones</h5>
+          <p class="card-text">Historial de transacciones</p>
+          <a routerLink="/transactions" class="btn btn-primary" (click)="goTransactions()">Mis Transacciones</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Cuentas</h5>
+          <p class="card-text">tus cuentas.</p>
+          <a routerLink="/accounts" class="btn btn-primary" (click)="goAccounts()">Mi Cuenta</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
