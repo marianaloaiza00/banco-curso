@@ -1,40 +1,33 @@
 <form [formGroup]="loginForm" (ngSubmit)="login()">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+      <div class="col-12 col-md-10 col-lg-6 col-xl-5">
         <div class="card text-dark bg-light mb-3" style="border-radius: 1rem">
           <div class="card-body p-5 text-center">
-            <h2 class="fw-bold mb-2 text-uppercase">Bienvenido</h2>
-            <p class="text-dark-50 mb-9">
-              Ingresa tu correo y contraseña para iniciar sesión
-            </p>
+            <h2 class="fw-bold mb-2 text-uppercase">Iniciar Sesión</h2>
+            <p class="text-dark-50 mb-9">Ingresa tus datos para iniciar sesión</p>
             <div class="form-outline form-white mb-4">
               <label class="form-label" for="email">Correo electrónico</label>
-              <input id="email" type="email" class="form-control form-control-lg" formControlName="email"
-                autocomplete="email" />
+              <input id="email" type="email" class="form-control form-control-lg" formControlName="email" />
               <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
                 <small class="text-danger">Ingresa un correo electrónico válido.</small>
               </div>
             </div>
             <div class="form-outline form-white mb-4">
               <label class="form-label" for="password">Contraseña</label>
-              <input id="password" type="password" class="form-control form-control-lg" formControlName="password"
-                autocomplete="current-password" />
+              <input id="password" type="password" class="form-control form-control-lg" formControlName="password" />
               <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-                <small class="text-danger">
-                  <span *ngIf="loginForm.get('password')?.errors?.['required']">Este campo es necesario.</span>
-                </small>
+                <small class="text-danger">Este campo es necesario.</small>
               </div>
             </div>
-            <div *ngIf="errorMessage" class="text-danger mb-4">
-              <small>{{ errorMessage }}</small>
+            <div *ngIf="(error$ | async) as error" class="text-danger mb-4">
+              <small>{{ error }}</small>
             </div>
-            <button class="btn btn-outline-dark btn-lg px-5 mb-5"
-              type="submit">
+            <button class="btn btn-outline-primary btn-lg px-5 mb-5" type="submit" [disabled]="loginForm.invalid">
               Iniciar Sesión
             </button>
-            <p class="mb-0">Aún no tienes una cuenta?</p>
-            <a (click)="goSignUp()" class="text-dark-50 fw-bold">Registrate</a>
+            <p class="mb-0">¿No tienes una cuenta?</p>
+            <a (click)="goSignUp()" class="text-dark-50 fw-bold">Regístrate aquí</a>
           </div>
         </div>
       </div>

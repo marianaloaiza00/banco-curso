@@ -29,8 +29,4 @@ export class AccountsComponent implements OnInit {
   goTransactions() {
     this.router.navigate(['/create-transaction']);
   }
-
-  goHome() {
-    this.router.navigate(['/home']);
-  }
 }
