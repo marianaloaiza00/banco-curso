@@ -15,7 +15,12 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUserProfile().subscribe({
       next: profile => this.profile = profile,
-      error: err => console.error(err)
+      error: err => {
+        console.error(err);
+        if (err.status === 500) {
+          this.logout();
+        }
+      }
     });
   }
 

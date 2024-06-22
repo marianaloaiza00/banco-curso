@@ -36,10 +36,6 @@ export class SignUpComponent {
     }
   }
 
-  goHome() {
-    this.router.navigate(['/home']);
-  }
-
   goLogin() {
     this.router.navigate(['/login']);
   }
