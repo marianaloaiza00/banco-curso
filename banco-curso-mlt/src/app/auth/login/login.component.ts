@@ -22,15 +22,21 @@ export class LoginComponent {
     });
   }
 
-  onSubmit() {
+  public login() {
     if (this.loginForm.valid) {
       const credentials = this.loginForm.value;
-      this.authService.loginUser(credentials).subscribe((response) => {
-        const accessToken = response.accessToken;
-        localStorage.setItem('accessToken', accessToken);
+
+      this.authService.login(credentials).subscribe({
+        next: (response) => {
+          if (response.accessToken) {
+            localStorage.setItem('token', response.accessToken);
+            this.router.navigate(['/accounts']);
+          }
+        },
+        error: (error) => {
+          console.error('Intenta de nuevo', error);
+        }
       });
-    } else {
-      alert('Por favor, completa todos los campos requeridos.');
     }
   }
 
