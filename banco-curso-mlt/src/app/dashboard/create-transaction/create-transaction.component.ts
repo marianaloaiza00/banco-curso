@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TransactionService } from 'src/app/core/service/transaction.service';
-import { Transaction } from 'src/app/shared/models/transaction.model';
+import { TransactionService } from '../../core/service/transaction.service';
+import { Transaction } from '../../shared/models/transaction.model';
+
 
 @Component({
   selector: 'app-create-transaction',
