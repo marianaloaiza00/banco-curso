@@ -1,0 +1,44 @@
+<button class="btn btn-outline-dark mb-0 mt-3 ms-3" type="submit" (click)="goHome()">
+  Volver
+</button>
+
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-10 col-lg-6 col-xl-5">
+        <div class="card text-dark bg-light mb-3" style="border-radius: 1rem">
+          <div class="card-body p-5 text-center">
+            <h2 class="fw-bold mb-2 text-uppercase">Bienvenido</h2>
+            <p class="text-dark-50 mb-9">Ingresa tus datos para registrarte</p>
+            <div class="row">
+              <div class="col-md-6 form-outline form-white mb-4">
+                <label class="form-label" for="firstName">Nombre</label>
+                <input id="firstName" type="text" class="form-control form-control-lg" formControlName="firstName"
+                  autocomplete="given-name" />
+              </div>
+              <div class="col-md-6 form-outline form-white mb-4">
+                <label class="form-label" for="lastName">Apellido</label>
+                <input id="lastName" type="text" class="form-control form-control-lg" formControlName="lastName"
+                  autocomplete="family-name" />
+              </div>
+            </div>
+            <div class="form-outline form-white mb-4">
+              <label class="form-label" for="email">Correo electrónico</label>
+              <input id="email" type="email" class="form-control form-control-lg" formControlName="email"
+                autocomplete="email" />
+            </div>
+            <div class="form-outline form-white mb-4">
+              <label class="form-label" for="password">Contraseña</label>
+              <input id="password" type="password" class="form-control form-control-lg" formControlName="password"
+                autocomplete="current-password" />
+            </div>
+            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary btn-lg px-5 mb-0"
+              type="submit">
+              Registrarse
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
